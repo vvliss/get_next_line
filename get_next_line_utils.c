@@ -6,50 +6,33 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 21:48:34 by wilisson          #+#    #+#             */
-/*   Updated: 2025/08/21 22:28:57 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/08/24 15:39:50 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-//helper for strjoin
-static char	*null_cases(char const *s1, char const *s2)
-{
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2)
-		return (ft_strdup(s1));
-	return (NULL);
-}
-
-//helper for strjoin
-static void	cpy_strings(char *dst, char const *s1, char const *s2)
-{
-	while (*s1)
-		*dst++ = *s1++;
-	while (*s2)
-		*dst++ = *s2++;
-	*dst = '\0';
-}
 //to combine the leftovers of the buffer with newly read data
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*ptr;
-	size_t	len_1;
-	size_t	len_2;
+	char	*str;
+	size_t	i;
+	size_t	j;
 
-	ptr = null_cases(s1, s2);
-	if (ptr)
-		return (ptr);
-	len_1 = ft_strlen(s1);
-	len_2 = ft_strlen(s2);
-	ptr = malloc(len_1 + len_2 + 1);
-	if (!ptr)
+	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
 		return (NULL);
-	cpy_strings(ptr, s1, s2);
-	return (ptr);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str);
 }
 
 //for finding /n in our str - to check
@@ -87,7 +70,7 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-size_t ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t i;
 
@@ -97,6 +80,8 @@ size_t ft_strlen(const char *s)
 	return(i);
 }
 
+//purpose - to extract a substring from a given string
+//and return it as a new null-terminated string
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ptr;
