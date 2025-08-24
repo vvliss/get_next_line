@@ -6,13 +6,13 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 21:48:34 by wilisson          #+#    #+#             */
-/*   Updated: 2025/08/24 15:39:50 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/08/24 18:46:33 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-//to combine the leftovers of the buffer with newly read data
+// to combine the leftovers of the buffer with newly read data
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -35,8 +35,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-//for finding /n in our str - to check
-//if the buffer already has a line to extract
+// for finding /n in our str - to check
+// if the buffer already has a line to extract
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
@@ -72,16 +72,16 @@ char	*ft_strdup(const char *s1)
 
 size_t	ft_strlen(const char *s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while(s[i] != '\0')
+	while (s[i] != '\0')
 		i++;
-	return(i);
+	return (i);
 }
 
-//purpose - to extract a substring from a given string
-//and return it as a new null-terminated string
+// purpose - to extract a substring from a given string
+// and return it as a new null-terminated string
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ptr;
