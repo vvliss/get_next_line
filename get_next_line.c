@@ -6,11 +6,38 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/12 15:55:55 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:56:00 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static char	*read_file(int fd, char *saved)
+{
+	char	*buf;
+	ssize_t	bytes;
+	char	*tmp;
+
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
+		return (NULL);
+	bytes = 1;
+	while (bytes > 0 && (!saved || !ft_strchr(saved, '\n')))
+	{
+		bytes = read(fd, buf, BUFFER_SIZE);
+		if (bytes < 0)
+		{
+			free(buf);
+			return (free(saved), NULL);
+		}
+		buf[bytes] = '\0';
+		tmp = ft_strjoin(saved, buf);
+		free(saved);
+		saved = tmp;
+	}
+	free(buf);
+	return (saved);
+}
 
 char	*get_next_line(int fd)
 {
