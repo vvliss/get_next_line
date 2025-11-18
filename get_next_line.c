@@ -6,7 +6,7 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/18 19:36:30 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:11:46 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,28 @@ static char	*extract_line(char *saved)
 	return (line);
 }
 
+static char	*trim_saved(char *saved)
+{
+	int		i;
+	int		j;
+	char	*new_s;
+
+	i = 0;
+	while (saved[i] && saved[i] != '\n')
+		i++;
+	if (!saved[i])
+		return (free(saved), NULL);
+	new_s = malloc(ft_strlen(saved) - i);
+	if (!new_s)
+		return (free(saved), NULL);
+	i++;
+	j = 0;
+	while (saved[i])
+		new_s[j++] = saved[i++];
+	new_s[j] = '\0';
+	free(saved);
+	return (new_s);
+}
 
 char	*get_next_line(int fd)
 {
@@ -85,4 +107,7 @@ char	*get_next_line(int fd)
 		free(saved);
 		saved = NULL;
 	}
+	else
+		saved = trim_saved(saved);
+	return (line);
 }
