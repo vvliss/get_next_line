@@ -6,7 +6,7 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/18 22:11:46 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:17:23 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,24 @@ char	*get_next_line(int fd)
 		saved = trim_saved(saved);
 	return (line);
 }
+
+// int main()
+// {
+//     int fd = open("file.txt", O_RDONLY);
+//     char *line;
+
+//     line = get_next_line(fd);
+//     printf("1: [%s]\n", line);
+//     if (line) printf("len: %zu\n", ft_strlen(line));
+//     free(line);
+
+//     line = get_next_line(fd);
+//     printf("2: [%s]\n", line);
+//     free(line);
+
+//     line = get_next_line(fd);
+//     printf("3: [%s]\n", line);
+//     free(line);
+
+//     return (0);
+// }
