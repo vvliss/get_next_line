@@ -6,7 +6,7 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/15 21:56:00 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/11/18 19:36:30 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,36 @@ static char	*read_file(int fd, char *saved)
 	return (saved);
 }
 
+static char	*extract_line(char *saved)
+{
+	char	*line;
+	int		i;
+	int		len;
+
+	i = 0;
+	if (!saved || !saved[0])
+		return (NULL);
+	while (saved[i] && saved[i] != '\n')
+		i++;
+	len = i;
+	if (saved[i] == '\n')
+		len++;
+	line = malloc(len + 1);
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (saved[i] && saved[i] != '\n')
+	{
+		line[i] = saved[i];
+		i++;
+	}
+	if (saved[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
+}
+
+
 char	*get_next_line(int fd)
 {
 	static char	*saved;
@@ -49,4 +79,10 @@ char	*get_next_line(int fd)
 	saved = read_file(fd, saved);
 	if (!saved)
 		return (NULL);
+	line = extract_line(saved);
+	if (!line)
+	{
+		free(saved);
+		saved = NULL;
+	}
 }
