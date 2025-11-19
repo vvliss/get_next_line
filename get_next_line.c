@@ -6,7 +6,7 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/18 22:17:23 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/11/18 22:23:37 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ static char	*read_file(int fd, char *saved)
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
-		return (NULL);
+		return (free(saved), NULL);
 	bytes = 1;
 	while (bytes > 0 && (!saved || !ft_strchr(saved, '\n')))
 	{
 		bytes = read(fd, buf, BUFFER_SIZE);
 		if (bytes < 0)
-		{
-			free(buf);
-			return (free(saved), NULL);
-		}
+			return (free(buf), free(saved), NULL);
+		if (bytes == 0)
+			break ;
 		buf[bytes] = '\0';
 		tmp = ft_strjoin(saved, buf);
+		if (!tmp)
+			return (free(saved), free(buf), NULL);
 		free(saved);
 		saved = tmp;
 	}
@@ -111,7 +112,6 @@ char	*get_next_line(int fd)
 		saved = trim_saved(saved);
 	return (line);
 }
-
 // int main()
 // {
 //     int fd = open("file.txt", O_RDONLY);
