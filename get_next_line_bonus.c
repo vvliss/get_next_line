@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/19 15:17:34 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:22:45 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_file(int fd, char *saved)
 {
@@ -94,41 +94,21 @@ static char	*trim_saved(char *saved)
 
 char	*get_next_line(int fd)
 {
-	static char	*saved;
+	static char	*saved[1024];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
-	saved = read_file(fd, saved);
-	if (!saved)
+	saved[fd] = read_file(fd, saved[fd]);
+	if (!saved[fd])
 		return (NULL);
-	line = extract_line(saved);
+	line = extract_line(saved[fd]);
 	if (!line)
 	{
-		free(saved);
-		saved = NULL;
+		free(saved[fd]);
+		saved[fd] = NULL;
 	}
 	else
-		saved = trim_saved(saved);
+		saved[fd] = trim_saved(saved[fd]);
 	return (line);
 }
-// int main()
-// {
-//     int fd = open("file.txt", O_RDONLY);
-//     char *line;
-
-//     line = get_next_line(fd);
-//     printf("1: [%s]\n", line);
-//     if (line) printf("len: %zu\n", ft_strlen(line));
-//     free(line);
-
-//     line = get_next_line(fd);
-//     printf("2: [%s]\n", line);
-//     free(line);
-
-//     line = get_next_line(fd);
-//     printf("3: [%s]\n", line);
-//     free(line);
-
-//     return (0);
-// }
