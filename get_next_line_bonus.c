@@ -6,7 +6,7 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/19 15:22:45 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/12/01 15:21:04 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,3 +112,48 @@ char	*get_next_line(int fd)
 		saved[fd] = trim_saved(saved[fd]);
 	return (line);
 }
+
+// int	main(void)
+// {
+// 	int		fds[3];
+// 	int		closed[3];
+// 	int		active;
+// 	int		i;
+// 	char	*line;
+
+// 	fds[0] = open("file1.txt", O_RDONLY);
+// 	fds[1] = open("file2.txt", O_RDONLY);
+// 	fds[2] = open("file3.txt", O_RDONLY);
+// 	closed[0] = (fds[0] < 0);
+// 	closed[1] = (fds[1] < 0);
+// 	closed[2] = (fds[2] < 0);
+// 	active = (fds[0] >= 0) + (fds[1] >= 0) + (fds[2] >= 0);
+// 	if (active == 0)
+// 		return (1);
+// 	while (active > 0)
+// 	{
+// 		i = 0;
+// 		while (i < 3)
+// 		{
+// 			if (!closed[i])
+// 			{
+// 				line = get_next_line(fds[i]);
+// 				if (!line)
+// 				{
+// 					close(fds[i]);
+// 					closed[i] = 1;
+// 					active--;
+// 				}
+// 				else
+// 				{
+// 					printf("[fd%d] %s", i + 1, line);
+// 					if (line[0] && line[ft_strlen(line) - 1] != '\n')
+// 						printf("\n");
+// 					free(line);
+// 				}
+// 			}
+// 			i++;
+// 		}
+// 	}
+// 	return (0);
+// }
