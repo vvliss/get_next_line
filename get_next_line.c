@@ -6,7 +6,7 @@
 /*   By: wilisson <wilisson@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 16:46:39 by wilisson          #+#    #+#             */
-/*   Updated: 2025/11/19 15:17:34 by wilisson         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:55:42 by wilisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,23 +112,34 @@ char	*get_next_line(int fd)
 		saved = trim_saved(saved);
 	return (line);
 }
-// int main()
+// int main(void)
 // {
-//     int fd = open("file.txt", O_RDONLY);
-//     char *line;
+//     int     fd;
+//     char    *line;
+//     int     i = 1;
 
-//     line = get_next_line(fd);
-//     printf("1: [%s]\n", line);
-//     if (line) printf("len: %zu\n", ft_strlen(line));
-//     free(line);
+//     fd = open("file.txt", O_RDONLY);
+//     if (fd < 0)
+//     {
+//         perror("open");
+//         return (1);
+//     }
 
-//     line = get_next_line(fd);
-//     printf("2: [%s]\n", line);
-//     free(line);
+//     printf("===== Testing get_next_line on file.txt =====\n");
 
-//     line = get_next_line(fd);
-//     printf("3: [%s]\n", line);
-//     free(line);
+//     while ((line = get_next_line(fd)))
+//     {
+//         printf("[%d]: \"%s\"", i, line);
 
+//         if (line[0] && line[ft_strlen(line) - 1] != '\n')
+//             printf("\n");
+
+//         free(line);
+//         i++;
+//     }
+
+//     printf("[EOF reached] get_next_line returned NULL\n");
+
+//     close(fd);
 //     return (0);
 // }
